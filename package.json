@@ -1,7 +1,7 @@
 {
   "name": "meet",
   "version": "0.1.0",
-  "homepage": "https://github.com/LetsCodeManh/MeetApp.git",
+  "homepage": "https://letscodemanh.github.io/MeetApp",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
