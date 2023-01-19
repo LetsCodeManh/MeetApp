@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/LetsCodeManh/MeetApp.git/static/css/main.073c9b0a.css",
-    "main.js": "/LetsCodeManh/MeetApp.git/static/js/main.0b66fbd5.js",
-    "static/js/787.4b564826.chunk.js": "/LetsCodeManh/MeetApp.git/static/js/787.4b564826.chunk.js",
-    "service-worker.js": "/LetsCodeManh/MeetApp.git/service-worker.js",
-    "static/media/logo.svg": "/LetsCodeManh/MeetApp.git/static/media/logo.103b5fa18196d5665a7e12318285c916.svg",
-    "index.html": "/LetsCodeManh/MeetApp.git/index.html",
-    "main.073c9b0a.css.map": "/LetsCodeManh/MeetApp.git/static/css/main.073c9b0a.css.map",
-    "main.0b66fbd5.js.map": "/LetsCodeManh/MeetApp.git/static/js/main.0b66fbd5.js.map",
-    "787.4b564826.chunk.js.map": "/LetsCodeManh/MeetApp.git/static/js/787.4b564826.chunk.js.map"
+    "main.css": "/MeetApp/static/css/main.073c9b0a.css",
+    "main.js": "/MeetApp/static/js/main.9c9f3fc0.js",
+    "static/js/787.4b564826.chunk.js": "/MeetApp/static/js/787.4b564826.chunk.js",
+    "service-worker.js": "/MeetApp/service-worker.js",
+    "static/media/logo.svg": "/MeetApp/static/media/logo.103b5fa18196d5665a7e12318285c916.svg",
+    "index.html": "/MeetApp/index.html",
+    "main.073c9b0a.css.map": "/MeetApp/static/css/main.073c9b0a.css.map",
+    "main.9c9f3fc0.js.map": "/MeetApp/static/js/main.9c9f3fc0.js.map",
+    "787.4b564826.chunk.js.map": "/MeetApp/static/js/787.4b564826.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.0b66fbd5.js"
+    "static/js/main.9c9f3fc0.js"
   ]
 }
