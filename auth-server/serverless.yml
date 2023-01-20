@@ -23,6 +23,13 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs12.x
+  region: eu-central-1
+  timeout: 60 # optional, in seconds, default is 6
+  environment:
+    CLIENT_ID: ${file(config.jsom):client_id}
+    CLIENT_SECRET: ${file(config.jsom):client_secret}
+    PROJECT_ID: ${file(config.jsom):project_id}
+    CALENDAR_ID: ${file(config.jsom):calendar_id}
 
 # you can overwrite defaults here
 #  stage: dev
@@ -59,8 +66,11 @@ provider:
 #    - include-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  getAuthURL:
+    handler: handler.getAuthURL
+    environment:
+      events:
+        - httpApi: 'GET /api/get-auth-url'
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
