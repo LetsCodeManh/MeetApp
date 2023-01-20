@@ -11,7 +11,7 @@ class CitySearch extends Component {
   handleInputChanged = (event) => {
     const value = event.target.value;
     const locations = extractLocations(mockData);
-    const suggestions = this.props.locations.filter((location) => {
+    const suggestions = locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
     this.setState({
