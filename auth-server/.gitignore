@@ -6,4 +6,4 @@ jspm_packages
 .serverless
 
 # Environment variables
-config-json
+config.json
