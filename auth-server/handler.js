@@ -54,3 +54,42 @@ module.exports.getAuthURL = async () => {
     }),
   };
 };
+
+module.exports.getAccessToken = async (event) => {
+  // The values used to instantiate the OAuthClient are at the top of the file
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
+
+  // Decode authorization code extracted from the URL query
+  const code = decodeURIComponent(`${event.pathParameters.code}`);
+
+  return new Promise((resolve, reject) => {
+    // Exchange authorization code for access token with a "callback" after the exchange, The callback in this case is an arrow function with the results as parameters: "error" and "token"
+
+    oAuth2Client.getToken(code, (error, token) => {
+      if (error) {
+        return reject(error);
+      }
+
+      return resolve(token);
+    });
+  })
+    .then((token) => {
+      // Respons with OAuth token
+      return {
+        statusCode: 200,
+        body: JSON.stringify(token),
+      };
+    })
+    .catch((error) => {
+      // Handle error
+      console.error(error);
+      return {
+        statusCode: 500,
+        body: JSON.stringify(error),
+      };
+    });
+};

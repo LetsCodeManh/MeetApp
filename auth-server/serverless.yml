@@ -6,9 +6,9 @@ provider:
   region: eu-central-1
   timeout: 60 # optional, in seconds, default is 6
   environment:
-    CLIENT_ID: ${file(config.json):CLIENT_ID}
-    CLIENT_SECRET: ${file(config.json):CLIENT_SECRET}
-    PROJECT_ID: ${file(config.json):PROJECT_ID}
+    CLIENT_ID: ${file(config.json):client_id}
+    CLIENT_SECRET: ${file(config.json):client_secret}
+    PROJECT_ID: ${file(config.json):project_id}
     CALENDAR_ID: ${file(config.json):CALENDAR_ID}
 
 functions:
@@ -18,3 +18,9 @@ functions:
       - http:
           path: api/get-auth-url
           method: get
+  getAccessToken:
+    handler: handler.getAccessToken
+    events:
+      - http:
+          path: api/token/{code}
+          method: get 
