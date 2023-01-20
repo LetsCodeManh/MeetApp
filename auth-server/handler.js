@@ -113,20 +113,22 @@ module.exports.getCalendarEvents = async (event) => {
   oAuth2Client.setCredentials({ access_token });
 
   return new Promise((resolve, reject) => {
-    calendar.events.list({
-      calendarId: calendar_id,
-      auth: oAuth2Client,
-      timeMin: new Date().toISOString(),
-      singleEvents: true,
-      orderBy: "startTime",
-    }),
+    calendar.events.list(
+      {
+        calendarId: calendar_id,
+        auth: oAuth2Client,
+        timeMin: new Date().toISOString(),
+        singleEvents: true,
+        orderBy: "startTime",
+      },
       (error, response) => {
         if (error) {
           reject(error);
         } else {
           resolve(response);
         }
-      };
+      }
+    );
   })
     .then((results) => {
       return {

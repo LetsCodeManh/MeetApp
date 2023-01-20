@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Event from "../Event.js/Event";
 
 class EventList extends Component {
   render() {
@@ -6,7 +7,7 @@ class EventList extends Component {
     return (
       <ul className="EventList">
         {events.map((event) => (
-          <Event event={event} />
+          <Event key={event.id} event={event} />
         ))}
       </ul>
     );
