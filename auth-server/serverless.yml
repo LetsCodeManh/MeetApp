@@ -4,7 +4,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: eu-central-1
-  timeout: 60 # optional, in seconds, default is 6
+  timeout: 30 # optional, in seconds, default is 6
   environment:
     CLIENT_ID: ${file(config.json):client_id}
     CLIENT_SECRET: ${file(config.json):client_secret}
