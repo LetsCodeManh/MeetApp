@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CitySearch from "./components/CitySearch/CitySearch";
-import EventList from "./components/EventList/EventList";
 import NumberOfEvents from "./components/NumberOfEvents/NumberOfEvents";
+import EventList from "./components/EventList/EventList";
 import { mockData } from "./MockData/mock-data";
 import { extractLocations, getEvents } from "./api";
 
@@ -11,11 +11,23 @@ class App extends Component {
     locations: [],
   };
 
+  componentDidMount() {
+    this.mounted = true;
+    getEvents().then((events) => {
+      this.setState({ events, locations: extractLocations(events) });
+    });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   updateEvents = (location) => {
     getEvents().then((events) => {
-      const locationEvents = events.filter(
-        (event) => event.location === location
-      );
+      const locationEvents =
+        location === "all"
+          ? events
+          : events.filter((event) => event.location === location);
       this.setState({
         events: locationEvents,
       });
@@ -23,14 +35,16 @@ class App extends Component {
   };
 
   render() {
+    const { locations, events } = this.state
+
     return (
       <div className="App">
         <CitySearch
-          locations={this.state.locations}
+          locations={locations}
           updateEvents={this.updateEvents}
         />
         <NumberOfEvents />
-        <EventList events={this.state.events} />
+        <EventList events={events} />
       </div>
     );
   }

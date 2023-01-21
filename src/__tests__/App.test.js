@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import App from "../App";
 import EventList from "../components/EventList/EventList";
 import CitySearch from "../components/CitySearch/CitySearch";
@@ -40,7 +40,7 @@ describe("<App /> integration", () => {
     AppWrapper.unmount();
   });
 
-  test('App passes "locations" state as a prop to CitySearch', () => {
+  test("App passes locations state as a prop to CitySearch", () => {
     const AppLocationsState = AppWrapper.state("locations");
 
     expect(AppLocationsState).not.toEqual(undefined);
@@ -64,6 +64,16 @@ describe("<App /> integration", () => {
     );
 
     expect(AppWrapper.state("events")).toEqual(eventToShow);
+    AppWrapper.unmount();
+  });
+
+  test("Get list of all events when user selects 'See all cities'", async () => {
+    const suggestionItems = AppWrapper.find(CitySearch).find(".suggestions li");
+
+    await suggestionItems.at(suggestionItems.length - 1).simulate("click");
+    const allEvents = await getEvents();
+
+    expect(AppWrapper.state("events")).toEqual(allEvents);
     AppWrapper.unmount();
   });
 });
