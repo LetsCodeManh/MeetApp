@@ -50,10 +50,8 @@ export const getAccessToken = async () => {
 
   if (!accessToken || tokenCheck.error) {
     await localStorage.removeItem("access_token");
-
     const searchParams = new URLSearchParams(window.location.search);
     const code = await searchParams.get("code");
-
     if (!code) {
       const results = await axios.get(
         "https://oviki6w0ab.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
@@ -69,9 +67,15 @@ export const getAccessToken = async () => {
 export const getEvents = async () => {
   NProgress.start();
 
-  if (isLocalhost) {
+  if (window.location.href.indexOf("localhost") > -1) {
     NProgress.done();
     return mockData;
+  }
+
+  if (!navigator.onLine) {
+    const data = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return data ? JSON.parse(data) : [];
   }
 
   const token = await getAccessToken();
@@ -79,14 +83,27 @@ export const getEvents = async () => {
   if (token) {
     removeQuery();
     const url = `https://oviki6w0ab.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;
-    const result = await axios.get(url);
-    if (result.data) {
-      let locations = extractLocations(result.data.events);
-      localStorage.setItem("lastEvents", JSON.stringify(result.data));
+
+    try {
+      const response = await axios.get(url);
+
+      // Save events
+      let events = await response.data.events;
+
+      // Save events to local storage for use when offline
+      localStorage.setItem("lastEvents", JSON.stringify(events));
+
+      // Save location data from events
+      let locations = extractLocations(events);
       localStorage.setItem("locations", JSON.stringify(locations));
+
+      NProgress.done();
+
+      return events;
+    } catch (error) {
+      NProgress.done();
+      console.error(error.response);
     }
-    NProgress.done();
-    return result.data.events;
   }
 };
 
@@ -95,5 +112,3 @@ export const extractLocations = (events) => {
   let locations = [...new Set(extractLocations)];
   return locations;
 };
-
-
