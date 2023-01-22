@@ -2,12 +2,11 @@ import React, { Component } from "react";
 
 class NumberOfEvents extends Component {
   state = {
-    numberOfEvents: 32,
+    numberOfEvents: this.props.defaultNumberOfEvents || 32,
   };
 
   handleInputChanged = (event) => {
     const inputValue = event.target.value;
-    this.props.updateEvents(null, inputValue);
     this.setState({
       numberOfEvents: inputValue,
     });
@@ -28,6 +27,9 @@ class NumberOfEvents extends Component {
       </div>
     );
   }
+}
+NumberOfEvents.defaultProps = {
+  defaultNumberOfEvents: 32
 }
 
 export default NumberOfEvents;
