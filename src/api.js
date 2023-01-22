@@ -1,6 +1,6 @@
 import axios from "axios";
 import NProgress from "nprogress";
-import { mockData } from "./MockData/mock-data";
+import { mockData } from "./MockData/mockData";
 
 const isLocalhost = Boolean(
   window.location.hostname === "localhost" ||
