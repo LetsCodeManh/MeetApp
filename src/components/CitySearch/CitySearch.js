@@ -1,33 +1,45 @@
 import React, { Component } from "react";
-import { extractLocations } from "../../api";
-import { mockData } from "../../MockData/mock-data";
 
 class CitySearch extends Component {
   state = {
     query: "",
     suggestions: [],
+    showSuggestions: undefined,
   };
 
   handleInputChanged = (event) => {
     const value = event.target.value;
-    const locations = extractLocations(mockData);
-    const suggestions = locations.filter((location) => {
+    this.setState({ showSuggestions: true });
+    const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
-    this.setState({
-      query: value,
-      suggestions: [],
-      showSuggestions: undefined,
-    });
+
+    if (suggestions.length === 0) {
+      this.setState({
+        query: value,
+        suggestions: [],
+        showSuggestions: false,
+      });
+    } else {
+      return this.setState({
+        query: value,
+        suggestions: suggestions,
+      });
+    }
   };
 
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
+      suggestions: [],
       showSuggestions: false,
     });
 
     this.props.updateEvents(suggestion);
+  };
+
+  handleInputFocus = () => {
+    this.setState({ showSuggestions: true });
   };
 
   render() {
@@ -39,7 +51,7 @@ class CitySearch extends Component {
           value={this.state.query}
           onChange={this.handleInputChanged}
           onFocus={() => {
-            this.setState({ showSuggestions: true });
+            this.handleInputFocus;
           }}
         />
         <ul

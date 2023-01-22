@@ -86,7 +86,7 @@ describe("<CitySearch /> component", () => {
   test("selecting a suggestion should hide the suggestions list", () => {
     CitySearchWrapper.setState({
       query: "Berlin",
-      showSuggestions: undefined,
+      showSuggestions: null,
     });
     CitySearchWrapper.find(".suggestions li").at(0).simulate("click");
 
