@@ -3,7 +3,6 @@ import { shallow } from "enzyme";
 import Event from "../components/Event.js/Event";
 
 describe("<Event /> component", () => {
-  let EventWrapper;
   beforeAll(() => {
     EventWrapper = shallow(<Event />);
   });
