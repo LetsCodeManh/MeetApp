@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+
 import CitySearch from "./components/CitySearch/CitySearch";
 import NumberOfEvents from "./components/NumberOfEvents/NumberOfEvents";
 import EventList from "./components/EventList/EventList";
-import { extractLocations, getEvents } from "./api";
+
+import { checkToken, extractLocations, getEvents } from "./api";
 
 class App extends Component {
   state = {
@@ -10,51 +12,22 @@ class App extends Component {
     locations: [],
     seletedLocation: "all",
     eventCount: 32,
+    isFetchData: false,
   };
 
-  componentDidMount() {
-    this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        events = events.slice(0, this.state.eventCount);
-        this.setState({ events, locations: extractLocations(events) });
-      }
+  getData = () => {
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter(
+        (event) => event.location === location
+      ).length;
+      const city = location.split(", ").shift();
+      return { city, number };
     });
-  }
+    return data;
+  };
 
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  updateEvents = (location, inputNumber) => {
-    const { eventCount, seletedLocation } = this.state;
-
-    if (location) {
-      getEvents().then((events) => {
-        const locationEvents =
-          location === "all"
-            ? events
-            : events.filter((event) => event.location === location);
-        const eventsToShow = locationEvents.slice(0, eventCount);
-        this.setState({
-          events: eventsToShow,
-          seletedLocation: location,
-        });
-      });
-    } else {
-      getEvents().then((events) => {
-        const locationEvents =
-          seletedLocation === "all"
-            ? events
-            : events.filter((event) => event.location === seletedLocation);
-        const eventsToShow = locationEvents.slice(0, inputNumber);
-        this.setState({
-          events: eventsToShow,
-          eventCount: inputNumber,
-        });
-      });
-    }
-
+  updateLocation = (location) => {
     getEvents().then((events) => {
       const locationEvents =
         location === "all"
@@ -66,27 +39,71 @@ class App extends Component {
     });
   };
 
-  getData = () => {
-    const { locations, events } = this.state;
-    const data = locations.map((location) => {
-      const number = events.filter(
-        (event) => event.location === location
-      ).length;
-      const city = location.split(", ").pop();
-      return { city, number };
+  updateEventCount = (eventCount) => {
+    getEvents().then(() => {
+      this.setState({
+        eventCount: eventCount,
+      });
     });
-
-    return data;
   };
 
+  async componentDidMount() {
+    this.mounted = true;
+
+    const accessToken = localStorage.getItem("access_token");
+
+    const tokenCheck = accessToken && (await checkToken(accessToken));
+    const isTokenValid = !accessToken || tokenCheck.error ? false : true;
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+
+    const authorized = code || isTokenValid;
+
+    const isLocal =
+      window.location.href.indexOf("localhost") > -1 ? true : false;
+
+    if ((authorized || isLocal) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({
+            events,
+            locations: extractLocations(events),
+          });
+        }
+      });
+    }
+
+    getEvents().then((events) => {
+      if (this.mounted) {
+        events = events.slice(0, this.state.eventCount);
+        this.setState({
+          events,
+          locations: extractLocations(events),
+          isFetchData: true,
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   render() {
-    const { locations, events } = this.state;
+    const { events, eventCount, locations, isFetchData } = this.state;
 
     return (
       <div className="App">
-        <CitySearch locations={locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents updateEvents={this.updateEvents} />
-        <EventList events={events} />
+        <CitySearch
+          locations={locations}
+          updateLocation={this.updateLocation}
+        />
+        <NumberOfEvents
+          eventCount={eventCount}
+          updateEventCount={this.updateEventCount}
+        />
+        <EventList events={events} eventCount={eventCount} />
       </div>
     );
   }
