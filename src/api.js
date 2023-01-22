@@ -1,16 +1,48 @@
+import { mockData } from "./MockData/mockData";
 import axios from "axios";
 import NProgress from "nprogress";
-import { mockData } from "./MockData/mockData";
 
-const isLocalhost = Boolean(
-  window.location.hostname === "localhost" ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === "[::1]" ||
-    // 127.0.0.0/8 are considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
-);
+const getToken = async (code) => {
+  try {
+    const encodeCode = encodeURIComponent(code);
+    const response = await fetch(
+      `https://oviki6w0ab.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const { access_token } = await response.json();
+    access_token && localStorage.setItem("access_token", access_token);
+    return access_token;
+  } catch (error) {
+    error.json();
+  }
+};
+
+const checkToken = async (accessToken) => {
+  const result = await fetch(
+    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+  )
+    .then((res) => res.json())
+    .catch((error) => error.json());
+
+  return result;
+};
+
+const removeQuery = () => {
+  if (window.history.pushState && window.location.pathname) {
+    var newUrl =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname;
+    window.history.pushState("", "", newUrl);
+  } else {
+    newUrl = window.location.protocol + "//" + window.location.host;
+    window.history.pushState("", "", newUrl);
+  }
+};
 
 export const getAccessToken = async () => {
   const accessToken = localStorage.getItem("access_token");
@@ -32,30 +64,6 @@ export const getAccessToken = async () => {
     return code && getToken(code);
   }
   return accessToken;
-};
-
-export const getToken = async (code) => {
-  const encodeCode = encodeURIComponent(code);
-  const { access_token } = await fetch(
-    `https://oviki6w0ab.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
-  )
-    .then((res) => {
-      return res.json();
-    })
-    .catch((error) => error);
-
-  access_token && localStorage.setItem("access_token", access_token);
-  return access_token;
-};
-
-export const checkToken = async (accessToken) => {
-  const result = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
-  )
-    .then((res) => res.json())
-    .catch((error) => error.json());
-
-  return result;
 };
 
 export const getEvents = async () => {
@@ -88,16 +96,4 @@ export const extractLocations = (events) => {
   return locations;
 };
 
-export const removeQuery = () => {
-  if (window.history.pushState && window.location.pathname) {
-    var newUrl =
-      window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname;
-    window.history.pushState("", "", newUrl);
-  } else {
-    newUrl = window.location.protocol + "//" + window.location.host;
-    window.history.pushState("", "", newUrl);
-  }
-};
+
