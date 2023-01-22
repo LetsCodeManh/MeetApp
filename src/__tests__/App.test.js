@@ -29,7 +29,11 @@ describe("<App/> component", () => {
 describe("<App /> integration", () => {
   let AppWrapper;
   beforeAll(() => {
-    AppWrapper = shallow(<App />);
+    AppWrapper = mount(<App />);
+  });
+
+  afterAll(() => {
+    AppWrapper.unmount();
   });
 
   test("App passes events state as a prop to EventList", () => {
@@ -37,7 +41,6 @@ describe("<App /> integration", () => {
 
     expect(AppEventsState).not.toEqual(undefined);
     expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
-    AppWrapper.unmount();
   });
 
   test("App passes locations state as a prop to CitySearch", () => {
@@ -47,24 +50,23 @@ describe("<App /> integration", () => {
     expect(AppWrapper.find(CitySearch).props().locations).toEqual(
       AppLocationsState
     );
-    AppWrapper.unmount();
   });
 
   test("Get list of events matching the city selected by the user", async () => {
-    const CitySearchWrapper = AppWrapper.find("CitySearch");
+    const CitySearchWrapper = AppWrapper.find(CitySearch);
     const locations = extractLocations(mockData);
+    CitySearchWrapper.setState({ suggestions: locations });
     const suggestions = CitySearchWrapper.state("suggestions");
     const selectedIndex = Math.floor(Math.random() * suggestions.length);
     const selectedCity = suggestions[selectedIndex];
 
     await CitySearchWrapper.instance().handleItemClicked(selectedCity);
     const allEvents = await getEvents();
-    const eventToShow = allEvents.filter(
+    const eventsToShow = allEvents.filter(
       (event) => event.location === selectedCity
     );
 
-    expect(AppWrapper.state("events")).toEqual(eventToShow);
-    AppWrapper.unmount();
+    expect(AppWrapper.state("events")).toEqual(eventsToShow);
   });
 
   test("Get list of all events when user selects 'See all cities'", async () => {
@@ -74,6 +76,5 @@ describe("<App /> integration", () => {
     const allEvents = await getEvents();
 
     expect(AppWrapper.state("events")).toEqual(allEvents);
-    AppWrapper.unmount();
   });
 });
