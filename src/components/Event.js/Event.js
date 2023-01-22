@@ -28,7 +28,7 @@ class Event extends Component {
             </div>
           )}
           <div className="expand-collapse-buttons">
-            <button onClick={this.toggleExpand}>
+            <button className={`${isExpanded ? "expanded-button" : "collapsed-button"}`} onClick={this.toggleExpand}>
               {isExpanded ? "Collapse" : "Expand"}
             </button>
           </div>

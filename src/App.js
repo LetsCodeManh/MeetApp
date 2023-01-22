@@ -47,7 +47,7 @@ class App extends Component {
           seletedLocation === "all"
             ? events
             : events.filter((event) => event.location === seletedLocation);
-        const eventsToShow = location.slice(0, inputNumber);
+        const eventsToShow = locationEvents.slice(0, inputNumber);
         this.setState({
           events: eventsToShow,
           eventCount: inputNumber,
@@ -72,7 +72,7 @@ class App extends Component {
       const number = events.filter(
         (event) => event.location === location
       ).length;
-      const city = location.split(", ").shift();
+      const city = location.split(", ").pop();
       return { city, number };
     });
 

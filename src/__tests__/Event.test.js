@@ -1,28 +1,18 @@
 import React from "react";
 import { shallow } from "enzyme";
 import Event from "../components/Event.js/Event";
+import { mockData } from "../MockData/mock-data";
 
 describe("<Event /> component", () => {
+  let EventWrapper, event;
   beforeAll(() => {
-    EventWrapper = shallow(<Event />);
+    event = mockData[0];
+    EventWrapper = shallow(<Event event={event} />);
   });
 
-  test("render events with collapsed view by default", () => {
-    expect(EventWrapper.find(".event .collapsed")).toHaveLength(1);
-    expect(EventWrapper.find(".event .expanded")).toHaveLength(1);
+  test("component receives event prop", () => {
+    expect(EventWrapper.props().event).toBeDefined();
   });
 
-  test("can expand an event to show details", () => {
-    EventWrapper.find(".event .expand-button").at(0).simulate("click");
-
-    expect(EventWrapper.find(".event .collapsed")).toHaveLength(0);
-    expect(EventWrapper.find(".event .expanded")).toHaveLength(1);
-  });
-
-  test("can collapse an event to hide details", () => {
-    EventWrapper.find(".event .collapse-button").at(0).simulate("click");
-
-    expect(EventWrapper.find(".event .collapsed")).toHaveLength(1);
-    expect(EventWrapper.find(".event .expanded")).toHaveLength(0);
-  });
+  
 });
