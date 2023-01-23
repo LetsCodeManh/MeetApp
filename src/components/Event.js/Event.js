@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { Component } from "react";
 
 class Event extends Component {
@@ -18,17 +19,19 @@ class Event extends Component {
       <li>
         <div className={`event ${isExpanded ? "expanded" : "collapsed"}`}>
           <div className="basic-info">
-            <h2>{event.summary}</h2>
-            <p>{event.location}</p>
+            <h2 className="summary">{event.summary}</h2>
+            <p className="location">{event.location}</p>
+            <p className="startDate">
+              {moment(event.start.dateTime).format("MMMM Do YYYY, h:mm a")}
+            </p>
           </div>
           {isExpanded && (
             <div>
-              <p>Date: {event.date}</p>
-              <p>{event.description}</p>
+              <p className="description">{event.description}</p>
             </div>
           )}
           <div className="expand-collapse-buttons">
-            <button className={`${isExpanded ? "expanded-button" : "collapsed-button"}`} onClick={this.toggleExpand}>
+            <button onClick={() => this.toggleExpand()}>
               {isExpanded ? "Collapse" : "Expand"}
             </button>
           </div>

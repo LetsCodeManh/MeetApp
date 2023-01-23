@@ -36,10 +36,6 @@ class CitySearch extends Component {
     this.props.updateLocation(suggestion);
   };
 
-  handleInputFocus = () => {
-    this.setState({ showSuggestions: true });
-  };
-
   render() {
     return (
       <div className="CitySearch">
@@ -49,7 +45,7 @@ class CitySearch extends Component {
           value={this.state.query}
           onChange={this.handleInputChanged}
           onFocus={() => {
-            this.handleInputFocus;
+            this.setState({ showSuggestions: true });
           }}
         />
         <ul

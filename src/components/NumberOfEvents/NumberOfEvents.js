@@ -29,7 +29,7 @@ class NumberOfEvents extends Component {
   }
 }
 NumberOfEvents.defaultProps = {
-  defaultNumberOfEvents: 32
-}
+  defaultNumberOfEvents: 32,
+};
 
 export default NumberOfEvents;
