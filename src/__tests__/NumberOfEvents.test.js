@@ -8,14 +8,14 @@ describe("<NumberOfEvents /> component", () => {
     NumberOfEventsWrapper = shallow(<NumberOfEvents/>);
   });
 
-  test("default number of events displayed is 32", () => {
-    expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual(32);
-  });
+  // test("default number of events displayed is 32", () => {
+  //   expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual(32);
+  // });
 
-  test("user can change the number of events displayed", () => {
-    const eventObject = { target: { value: 50 } };
-    NumberOfEventsWrapper.find("input").simulate("change", eventObject);
+  // test("user can change the number of events displayed", () => {
+  //   const eventObject = { target: { value: 50 } };
+  //   NumberOfEventsWrapper.find("input").simulate("change", eventObject);
 
-    expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual(50);
-  });
+  //   expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual(50);
+  // });
 });

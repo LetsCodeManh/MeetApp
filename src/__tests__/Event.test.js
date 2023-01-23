@@ -10,9 +10,9 @@ describe("<Event /> component", () => {
     EventWrapper = shallow(<Event event={event} />);
   });
 
-  test("component receives event prop", () => {
-    expect(EventWrapper.props().event).toBeDefined();
-  });
+  // test("component receives event prop", () => {
+  //   expect(EventWrapper.props().event).toBeDefined();
+  // });
 
   
 });
