@@ -22,7 +22,7 @@ class NumberOfEvents extends Component {
     const { numberOfEvents } = this.state;
 
     return (
-      <div>
+      <div className="NumberOfEvents">
         <input
           type="number"
           className="eventCountInput"

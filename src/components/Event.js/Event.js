@@ -16,7 +16,7 @@ class Event extends Component {
     const { event } = this.props;
     const { isExpanded } = this.state;
     return (
-      <li>
+      <li className="eventData">
         <div className={`event ${isExpanded ? "expanded" : "collapsed"}`}>
           <div className="basic-info">
             <h2 className="summary">{event.summary}</h2>
