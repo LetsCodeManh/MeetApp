@@ -5,17 +5,23 @@ import NumberOfEvents from "../components/NumberOfEvents/NumberOfEvents";
 describe("<NumberOfEvents /> component", () => {
   let NumberOfEventsWrapper;
   beforeAll(() => {
-    NumberOfEventsWrapper = shallow(<NumberOfEvents/>);
+    NumberOfEventsWrapper = shallow(
+      <NumberOfEvents updateEventCount={() => {}} />
+    );
   });
 
-  // test("default number of events displayed is 32", () => {
-  //   expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual(32);
-  // });
+  test("render number of events input field", () => {
+    expect(NumberOfEventsWrapper.find(".eventCountInput")).toHaveLength(1);
+  });
 
-  // test("user can change the number of events displayed", () => {
-  //   const eventObject = { target: { value: 50 } };
-  //   NumberOfEventsWrapper.find("input").simulate("change", eventObject);
+  test("default number of events displayed is 32", () => {
+    expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual(32);
+  });
 
-  //   expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual(50);
-  // });
+  test("user can change the number of events displayed", () => {
+    const eventObject = { target: { value: 50 } };
+    NumberOfEventsWrapper.find("input").simulate("change", eventObject);
+
+    expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual(50);
+  });
 });
