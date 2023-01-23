@@ -9,7 +9,6 @@ class CitySearch extends Component {
 
   handleInputChanged = (event) => {
     const value = event.target.value;
-    this.setState({ showSuggestions: true });
     const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
@@ -23,7 +22,7 @@ class CitySearch extends Component {
     } else {
       return this.setState({
         query: value,
-        suggestions: suggestions,
+        suggestions,
       });
     }
   };
@@ -31,11 +30,10 @@ class CitySearch extends Component {
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
-      suggestions: [],
       showSuggestions: false,
     });
 
-    this.props.updateEvents(suggestion);
+    this.props.updateLocation(suggestion);
   };
 
   handleInputFocus = () => {
