@@ -9,4 +9,3 @@ Scenario: User can change the number of events they want to see
 Given The user is viewing a list of events
 When The user enters a number in the “Number of Events” input field
 Then The number of events displayed should update to match the number entered by the user
-And The max number of events that can displayed is 100, if user enter more than 100, it will only display 100 events not more.

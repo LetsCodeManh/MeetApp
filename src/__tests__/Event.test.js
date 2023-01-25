@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Event from "../components/Event.js/Event";
+import Event from "../components/Event/Event";
 import { mockData } from "../MockData/mockData";
 import moment from "moment";
 
