@@ -16,7 +16,6 @@ body {
 .CitySearch {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
   padding-inline: 2rem;
   margin-top: 3rem;
   position: relative;
@@ -30,8 +29,14 @@ body {
 }
 
 .suggestions {
+  position: absolute;
+  top: 3rem;
+  z-index: 99;
+  left: 0;
+  right: 0;
+  border: 1px solid black;
   list-style: none;
-  margin: 0;
+  margin-inline: 2rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -48,7 +53,7 @@ body {
   display: flex;
   flex-direction: column;
   padding-inline: 2rem;
-  margin-top: 2rem;
+  margin-top: 4.5rem;
   position: relative;
 }
 
