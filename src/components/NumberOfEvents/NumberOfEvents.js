@@ -9,6 +9,12 @@ class NumberOfEvents extends Component {
 
   handleInputChanged = (event) => {
     const inputValue = parseInt(event.target.value);
+    if (isNaN(inputValue)) {
+      this.setState({
+        NumberOfEvents: 1,
+        errorText: "Please, pick a number between 1 and 100",
+      });
+    }
 
     if (inputValue < 1 || inputValue > 100) {
       console.log("Pick a number between 1 and 100");
