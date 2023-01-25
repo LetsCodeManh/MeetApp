@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Event from "../Event.js/Event";
+import Event from "../Event/Event";
 
 class EventList extends Component {
   render() {
