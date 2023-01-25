@@ -85,7 +85,9 @@ body {
 
 .eventData {
   border: 1px solid black;
+  background-color: black;
   border-radius: 0.5rem;
+  color: white;
 }
 
 .event {
@@ -107,7 +109,7 @@ h3 {
 }
 
 .expand-collapse-buttons button {
-  background-color: aquamarine;
+  background-color: #FF8700;
   padding: 0.5rem;
   border: 1px solid black;
   border-radius: 0.5rem;

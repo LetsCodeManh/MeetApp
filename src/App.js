@@ -91,7 +91,7 @@ class App extends Component {
   }
 
   render() {
-    const { events, eventCount, locations, isFetchData } = this.state;
+    const { events, eventCount, locations } = this.state;
 
     return (
       <div className="App">
