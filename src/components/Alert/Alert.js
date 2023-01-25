@@ -31,7 +31,7 @@ class InfoAlert extends Alert {
     super(props);
     this.color = "blue";
     this.position = "absolute";
-    this.top = "-3rem";
+    this.top = "-2.2rem";
     this.left = 0;
     this.right = 0;
     this.paddingInline = "2rem";
@@ -43,7 +43,7 @@ class ErrorAlert extends Alert {
     super(props);
     this.color = "red";
     this.position = "absolute";
-    this.top = "3rem";
+    this.top = "4.5rem";
     this.left = 0;
     this.right = 0;
     this.paddingInline = "2rem";
@@ -53,7 +53,7 @@ class ErrorAlert extends Alert {
 class WarningAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = "orange";
+    this.color = "#FF5F00";
   }
 }
 

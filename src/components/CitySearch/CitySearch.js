@@ -45,7 +45,9 @@ class CitySearch extends Component {
     return (
       <div className="CitySearch">
         <InfoAlert text={this.state.infoText} />
+        <label htmlFor="city">Search for City</label>
         <input
+          id="city"
           type="text"
           className="city"
           value={this.state.query}
@@ -54,6 +56,7 @@ class CitySearch extends Component {
             this.setState({ showSuggestions: true });
           }}
         />
+
         <ul
           className="suggestions"
           style={this.state.showSuggestions ? {} : { display: "none" }}

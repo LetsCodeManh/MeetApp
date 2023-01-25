@@ -90,11 +90,11 @@ export const getEvents = async () => {
       // Save events
       let events = await response.data.events;
 
+      let locations = extractLocations(events);
       // Save events to local storage for use when offline
       localStorage.setItem("lastEvents", JSON.stringify(events));
 
       // Save location data from events
-      let locations = extractLocations(events);
       localStorage.setItem("locations", JSON.stringify(locations));
 
       NProgress.done();

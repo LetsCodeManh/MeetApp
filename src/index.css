@@ -17,7 +17,8 @@ body {
   display: flex;
   flex-direction: column;
   padding-inline: 2rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  gap: .5rem;
   position: relative;
 }
 
@@ -30,7 +31,7 @@ body {
 
 .suggestions {
   position: absolute;
-  top: 3rem;
+  top: 5rem;
   z-index: 99;
   left: 0;
   right: 0;
@@ -55,6 +56,7 @@ body {
   padding-inline: 2rem;
   margin-top: 4.5rem;
   position: relative;
+  gap: .5rem;
 }
 
 .eventCountInput {
@@ -72,7 +74,7 @@ body {
   grid-template-columns: 1fr;
   gap: 1rem;
   padding-inline: 2rem;
-  margin-top: 2rem;
+  margin-top: .5rem;
 }
 
 @media (min-width: 768px) {

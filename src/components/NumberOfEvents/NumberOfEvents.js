@@ -35,7 +35,9 @@ class NumberOfEvents extends Component {
 
     return (
       <div className="NumberOfEvents">
+        <label htmlFor="number">Pick a Number between 1 and 100</label>
         <input
+          id="number"
           type="number"
           className="eventCountInput"
           value={numberOfEvents}
