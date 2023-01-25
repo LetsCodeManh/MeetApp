@@ -1,9 +1,11 @@
 import moment from "moment";
 import React, { Component } from "react";
+import { WarningAlert } from "../Alert/Alert";
 
 class Event extends Component {
   state = {
     isExpanded: false,
+    warningText: "",
   };
 
   toggleExpand = () => {
@@ -11,6 +13,18 @@ class Event extends Component {
       isExpanded: !prevState.isExpanded,
     }));
   };
+
+  componentDidMount() {
+    const { event } = this.props;
+    const eventStartDate = moment(event.start.dateTime);
+    const currentDate = moment();
+
+    if (eventStartDate.isBefore(currentDate)) {
+      this.setState({
+        warningText: "This event has already started",
+      });
+    }
+  }
 
   render() {
     const { event } = this.props;
@@ -24,6 +38,7 @@ class Event extends Component {
             <p className="startDate">
               {moment(event.start.dateTime).format("MMMM Do YYYY, h:mm a")}
             </p>
+            <WarningAlert text={this.state.warningText} />
           </div>
           {isExpanded && (
             <div>
