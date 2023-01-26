@@ -137,4 +137,29 @@ Serverless is the next generation of cloud infrastructure, PWA provides great us
 
 - **User Stories Example**: As a **user**, I would like to **be able to add the app shortcut to my home screen** so that **I can open the app faster.**
 
-## To be continued...
+## Access
+
+The live app: https://letscodemanh.github.io/MeetApp/
+If you want to get teh access if write me an email. I will add you as a tester. You also need a Google account to able to test it.
+
+## Stack
+
+### Frontend
+
+- React
+- Recharts
+- Moment
+
+### Backend
+
+- Axios
+- Google OAuth2
+- Google Calendar API
+
+### Testing
+
+- Jest
+- Jest-Cucumber
+- Enzyme
+- Puppeteer
+- Atatus
