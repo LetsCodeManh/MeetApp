@@ -107,6 +107,7 @@ h3 {
 
 h2 {
   margin: 0;
+  margin-bottom: 1rem;
 }
 
 .expand-collapse-buttons button {
@@ -118,4 +119,12 @@ h2 {
 
 .description {
   font-size: 0.9rem;
+}
+
+.data-vis-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 1rem;
 }
