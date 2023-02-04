@@ -52,6 +52,8 @@ If you would like to test the app, please send an email. You will be added as a 
 
 ## Screenshots
 
+<img width="854" alt="MeetApp" src="https://user-images.githubusercontent.com/98701957/216777065-d40aed58-8a9c-4b4d-ba0d-167e91c5fb76.png">
+
 ## My Role and Tasks
 
 My responsibility was to translate the user stories into features, breaking down each feature into sub-features, and testing them using a combination of Jest, Enzyme, and Puppeteer. This was my first time working with TDD and BDD techniques and testing libraries like Jest and Enzyme.
