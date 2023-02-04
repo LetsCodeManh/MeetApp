@@ -6,25 +6,27 @@ MeetApp is a progressive web application (PWA) built using React and a serverles
 
 1. Filter events by City
 
-   - Users can filter events based on their city of choice, making it easier to find events happening near them
+- Users can filter events based on their city of choice, making it easier to find events happening near them
 
 2. Show/ Hide an Even’s details
 
-   - Users have the option to toggle between showing and hiding event details, allowing them to view more or less information about an event.
+- Users have the option to toggle between showing and hiding event details, allowing them to view more or less information about an event.
 
 3. Specify Number of Events
-   -User can choose the number of events they want to see in the app at once.
+
+- User can choose the number of events they want to see in the app at once.
 
 4. Use the App when Offline
 
-   - MeetApp works even when offline, allowing users to view events they previosuly viewed while online.
+- MeetApp works even when offline, allowing users to view events they previosuly viewed while online.
 
 5. Data Visualization
 
-   - The app provides a chart displaying upcoming events in each city, helping users see what events are happening where.
+- The app provides a chart displaying upcoming events in each city, helping users see what events are happening where.
 
 6. Add an app Shortcut to the home screen
-   - MeetApp provides the choice to add a shortcut to the home screen, making it easier to quickly access the app.
+
+- MeetApp provides the choice to add a shortcut to the home screen, making it easier to quickly access the app.
 
 ## Live Demo and Access
 
